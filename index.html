@@ -55,7 +55,7 @@
             width: auto;
 
             /* --- GESTIÓN DE IMAGEN DE FONDO --- */
-            background-image: url('./tarjeta-maiana-15.png');
+            background-image: url('./fondo-maiana-15.jpg');
 
             background-size: cover;
             background-position: center top;
@@ -89,19 +89,21 @@
 
         /* --- 4. CONTENIDO INTERNO --- */
         .content {
-            position: absolute;
-            top: 0;
-            left: 0;
+            /* Cambio de absolute a relative para permitir scroll natural */
+            position: relative;
             width: 100%;
-            height: 100%;
+            min-height: 100%;
+
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            /* Espaciado seguro para el diseño floral */
+            /* Padding extra abajo para forzar scroll si es necesario y dar aire a los botones */
             padding-top: 35%;
             padding-left: 10%;
             padding-right: 10%;
+            padding-bottom: 15vh;
+            /* Espacio para scroll extra */
 
             text-align: center;
             color: var(--text-color);
@@ -127,6 +129,8 @@
 
         /* Botones de pie de página */
         .footer-actions {
+            /* Posición absoluta relativa al contenedor .content (que ahora es relative) 
+               o margin-top auto para empujar al fondo si estás usando flex column */
             position: absolute;
             bottom: 30px;
             left: 0;
