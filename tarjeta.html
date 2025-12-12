@@ -466,9 +466,9 @@
 
 <body>
 
-    <!-- Audio de fondo (opcional - agregar archivo music.mp3) -->
+    <!-- Audio de fondo - Dua Lipa Levitating -->
     <audio id="bgMusic" class="bg-audio" loop>
-        <source src="./music.mp3" type="audio/mpeg">
+        <source src="./Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" type="audio/mpeg">
     </audio>
 
     <div class="mobile-frame">
@@ -677,6 +677,17 @@
         const bgMusic = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicBtn');
         let isMuted = true;
+
+        // Intentar autoplay cuando se carga la página
+        document.addEventListener('DOMContentLoaded', function () {
+            bgMusic.play().then(() => {
+                musicBtn.classList.remove('muted');
+                isMuted = false;
+            }).catch(() => {
+                // Autoplay bloqueado, esperar interacción del usuario
+                console.log('Autoplay blocked, waiting for user interaction');
+            });
+        });
 
         function toggleMusic() {
             if (isMuted) {
