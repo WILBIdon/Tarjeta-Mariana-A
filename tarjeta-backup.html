@@ -12,12 +12,6 @@
 
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-    <!-- Google Fonts: Elegant Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap"
-        rel="stylesheet">
-
     <style>
         /* --- 1. RESET Y VARIABLES --- */
         :root {
@@ -26,7 +20,6 @@
             --shadow-soft: 0 2px 4px rgba(0, 0, 0, 0.5);
             --shadow-hard: 0 20px 50px rgba(0, 0, 0, 0.9);
             --fuchsia: #ff00ff;
-            --gold: #d4af37;
         }
 
         * {
@@ -42,7 +35,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
 
@@ -80,30 +73,19 @@
             }
         }
 
-        /* --- 3. CORONA CON BRILLO PULSANTE --- */
+        /* --- 3. CORONA ESTÁTICA --- */
         .floating-crown {
             position: absolute;
             top: 30%;
+            /* Sobre la estrella del fondo */
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
+            /* 100px de ancho */
             min-width: 100px;
             height: auto;
             z-index: 20;
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(192, 192, 192, 0.6));
-            animation: crownGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes crownGlow {
-
-            0%,
-            100% {
-                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(192, 192, 192, 0.6));
-            }
-
-            50% {
-                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.4));
-            }
         }
 
         /* --- 4. CONTENEDOR DE ESTRELLAS --- */
@@ -118,7 +100,7 @@
             z-index: 15;
         }
 
-        /* --- 5. ESTRELLA CON MOVIMIENTO ONDULANTE --- */
+        /* --- 5. ESTRELLA INDIVIDUAL --- */
         .star {
             position: absolute;
             width: 8px;
@@ -128,72 +110,26 @@
             opacity: 1;
             pointer-events: none;
             box-shadow: 0 0 6px #fff, 0 0 12px rgba(255, 255, 255, 0.8);
-            animation: fallStarWavy 7s ease-out forwards;
+            animation: fallStar 7s ease-out forwards;
         }
 
-        @keyframes fallStarWavy {
+        @keyframes fallStar {
             0% {
                 opacity: 1;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-
-            25% {
-                transform: translateY(45px) translateX(15px) scale(0.9);
+                transform: translateY(0) scale(1);
             }
 
             50% {
                 opacity: 0.8;
-                transform: translateY(90px) translateX(-10px) scale(0.7);
-            }
-
-            75% {
-                transform: translateY(135px) translateX(8px) scale(0.4);
             }
 
             100% {
                 opacity: 0;
-                transform: translateY(180px) translateX(0) scale(0.2);
+                transform: translateY(180px) scale(0.2);
             }
         }
 
-        /* --- 6. COUNTDOWN TIMER --- */
-        .countdown-container {
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 25;
-        }
-
-        .countdown-item {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 0, 255, 0.4);
-            border-radius: 12px;
-            padding: 10px 12px;
-            min-width: 55px;
-        }
-
-        .countdown-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--fuchsia);
-            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-        }
-
-        .countdown-label {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-
-        /* --- 7. BOTONES DE PIE DE PÁGINA --- */
+        /* --- 6. BOTONES DE PIE DE PÁGINA --- */
         .footer-actions {
             position: absolute;
             bottom: 30px;
@@ -215,11 +151,6 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--text-color);
-            transition: transform 0.3s ease;
-        }
-
-        .action-item:active {
-            transform: scale(0.95);
         }
 
         .icon-circle {
@@ -233,13 +164,13 @@
             background: rgba(0, 0, 0, 0.6);
             margin-bottom: 8px;
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .action-item:hover .icon-circle {
-            transform: scale(1.15);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
-            background: rgba(255, 0, 255, 0.15);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+            background: rgba(255, 0, 255, 0.1);
         }
 
         .icon-circle svg {
@@ -256,47 +187,7 @@
             font-weight: 500;
         }
 
-        /* --- 8. BOTÓN DE COMPARTIR Y MÚSICA --- */
-        .floating-buttons {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 30;
-        }
-
-        .floating-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .floating-btn:hover {
-            border-color: var(--fuchsia);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-        }
-
-        .floating-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #fff;
-        }
-
-        .floating-btn.muted svg {
-            opacity: 0.4;
-        }
-
-        /* --- 9. MODAL CON ANIMACIÓN MEJORADA --- */
+        /* --- 7. MODAL/POPUP --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -304,20 +195,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            animation: fadeInModal 0.3s ease;
         }
 
         .modal-overlay.active {
             display: flex;
-            animation: modalFadeIn 0.3s ease forwards;
         }
 
-        @keyframes modalFadeIn {
+        @keyframes fadeInModal {
             from {
                 opacity: 0;
             }
@@ -336,74 +225,44 @@
             width: 320px;
             text-align: center;
             color: var(--text-color);
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.4);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
             position: relative;
-            transform: translateY(30px) scale(0.95);
-            opacity: 0;
-            animation: modalSlideUp 0.4s ease 0.1s forwards;
-        }
-
-        @keyframes modalSlideUp {
-            from {
-                transform: translateY(30px) scale(0.95);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
         }
 
         .modal-close {
             position: absolute;
             top: 10px;
             right: 15px;
-            font-size: 28px;
+            font-size: 24px;
             color: #fff;
             cursor: pointer;
             opacity: 0.7;
-            transition: opacity 0.2s, transform 0.2s;
+            transition: opacity 0.2s;
         }
 
         .modal-close:hover {
             opacity: 1;
-            transform: scale(1.1);
         }
 
         .modal-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 32px;
+            font-size: 20px;
             margin-bottom: 20px;
             color: var(--fuchsia);
+            font-weight: bold;
         }
 
         .modal-icon {
             font-size: 60px;
             margin-bottom: 15px;
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes iconPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
         }
 
         .modal-text {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
         }
 
-        /* --- 10. FORMULARIO RSVP --- */
+        /* --- 8. FORMULARIO RSVP --- */
         .rsvp-form {
             display: flex;
             flex-direction: column;
@@ -413,22 +272,20 @@
         .rsvp-form input,
         .rsvp-form select,
         .rsvp-form textarea {
-            padding: 14px;
+            padding: 12px;
             border: 1px solid rgba(255, 0, 255, 0.4);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
             font-size: 14px;
-            font-family: 'Segoe UI', sans-serif;
             outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: border-color 0.2s;
         }
 
         .rsvp-form input:focus,
         .rsvp-form select:focus,
         .rsvp-form textarea:focus {
             border-color: var(--fuchsia);
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
         }
 
         .rsvp-form input::placeholder,
@@ -442,79 +299,40 @@
         }
 
         .rsvp-form button {
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--fuchsia) 0%, #cc00cc 100%);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #fff;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .rsvp-form button:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
         }
 
-        /* --- 11. AUDIO HIDDEN --- */
-        .bg-audio {
-            display: none;
+        /* Icono de vestido/traje */
+        .dress-icon {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Audio de fondo (opcional - agregar archivo music.mp3) -->
-    <audio id="bgMusic" class="bg-audio" loop>
-        <source src="./music.mp3" type="audio/mpeg">
-    </audio>
-
     <div class="mobile-frame">
-
-        <!-- BOTONES FLOTANTES (Compartir + Música) -->
-        <div class="floating-buttons">
-            <div class="floating-btn" id="shareBtn" onclick="shareInvitation()">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" />
-                </svg>
-            </div>
-            <div class="floating-btn muted" id="musicBtn" onclick="toggleMusic()">
-                <svg viewBox="0 0 24 24" id="musicIcon">
-                    <path
-                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                </svg>
-            </div>
-        </div>
 
         <!-- CONTENEDOR DE ESTRELLAS -->
         <div class="stars-container" id="starsContainer"></div>
 
-        <!-- CORONA CON BRILLO -->
-        <img src="./Nueva corona.png" alt="Corona" class="floating-crown" id="floatingCrown" loading="lazy">
-
-        <!-- COUNTDOWN TIMER -->
-        <div class="countdown-container" id="countdown">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">00</div>
-                <div class="countdown-label">Días</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">00</div>
-                <div class="countdown-label">Horas</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">00</div>
-                <div class="countdown-label">Min</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">00</div>
-                <div class="countdown-label">Seg</div>
-            </div>
-        </div>
+        <!-- CORONA -->
+        <img src="./Nueva corona.png" alt="Corona" class="floating-crown" id="floatingCrown">
 
         <!-- BOTONES DE PIE DE PÁGINA -->
         <div class="footer-actions">
@@ -613,33 +431,7 @@
     </div>
 
     <script>
-        // --- COUNTDOWN TIMER ---
-        // CAMBIAR ESTA FECHA AL EVENTO REAL
-        const eventDate = new Date('2025-03-15T18:00:00').getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-            } else {
-                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><div class="countdown-number" style="font-size:18px;">¡Es Hoy!</div></div>';
-            }
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // --- SISTEMA DE PARTÍCULAS: ESTRELLAS CON MOVIMIENTO ONDULANTE ---
+        // --- SISTEMA DE PARTÍCULAS: ESTRELLAS CAYENDO ---
         const starsContainer = document.getElementById('starsContainer');
         const crown = document.getElementById('floatingCrown');
 
@@ -653,15 +445,15 @@
             const crownCenterX = crownRect.left - containerRect.left + crownRect.width / 2;
             const crownBottomY = crownRect.top - containerRect.top + crownRect.height;
 
-            const offsetX = (Math.random() - 0.5) * 60;
+            const offsetX = (Math.random() - 0.5) * 50;
             star.style.left = (crownCenterX + offsetX) + 'px';
             star.style.top = crownBottomY + 'px';
 
-            const size = 4 + Math.random() * 8;
+            const size = 4 + Math.random() * 6;
             star.style.width = size + 'px';
             star.style.height = size + 'px';
 
-            const duration = 5 + Math.random() * 3;
+            const duration = 3 + Math.random() * 2;
             star.style.animationDuration = duration + 's';
 
             starsContainer.appendChild(star);
@@ -671,41 +463,7 @@
             }, duration * 1000);
         }
 
-        setInterval(createStar, 250);
-
-        // --- MÚSICA DE FONDO ---
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        let isMuted = true;
-
-        function toggleMusic() {
-            if (isMuted) {
-                bgMusic.play().catch(() => {});
-                musicBtn.classList.remove('muted');
-                isMuted = false;
-            } else {
-                bgMusic.pause();
-                musicBtn.classList.add('muted');
-                isMuted = true;
-            }
-        }
-
-        // --- COMPARTIR INVITACIÓN ---
-        function shareInvitation() {
-            const shareData = {
-                title: 'Invitación Especial',
-                text: '¡Estás invitado/a a un momento especial! 🎉',
-                url: window.location.href
-            };
-
-            if (navigator.share) {
-                navigator.share(shareData).catch(() => {});
-            } else {
-                // Fallback: compartir por WhatsApp
-                const text = encodeURIComponent('¡Estás invitado/a a un momento especial! 🎉 Abre aquí: ' + window.location.href);
-                window.open('https://wa.me/?text=' + text, '_blank');
-            }
-        }
+        setInterval(createStar, 300);
 
         // --- MODALES ---
         function openModal(modalId) {
