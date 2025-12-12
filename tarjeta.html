@@ -703,17 +703,19 @@
 
         // --- COMPARTIR INVITACIÓN ---
         function shareInvitation() {
+            // Siempre compartir el index para mostrar la animación inicial
+            const baseUrl = window.location.href.replace('tarjeta.html', 'index.html');
             const shareData = {
                 title: 'Invitación Especial',
                 text: '¡Estás invitado/a a un momento especial! 🎉',
-                url: window.location.href
+                url: baseUrl
             };
 
             if (navigator.share) {
                 navigator.share(shareData).catch(() => { });
             } else {
                 // Fallback: compartir por WhatsApp
-                const text = encodeURIComponent('¡Estás invitado/a a un momento especial! 🎉 Abre aquí: ' + window.location.href);
+                const text = encodeURIComponent('¡Estás invitado/a a un momento especial! 🎉 Abre aquí: ' + baseUrl);
                 window.open('https://wa.me/?text=' + text, '_blank');
             }
         }
