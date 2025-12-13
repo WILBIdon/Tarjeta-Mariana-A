@@ -142,61 +142,10 @@
                 transform: rotate(360deg);
             }
         }
-
-        /* Botón de música flotante */
-        .music-btn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 300;
-            transition: all 0.3s ease;
-        }
-
-        .music-btn:hover {
-            border-color: #ff00ff;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-        }
-
-        .music-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: #fff;
-        }
-
-        .music-btn.muted svg {
-            opacity: 0.4;
-        }
-
-        .bg-audio {
-            display: none;
-        }
     </style>
 </head>
 
 <body>
-
-    <!-- Audio de fondo - Dua Lipa Levitating -->
-    <audio id="bgMusic" class="bg-audio" loop>
-        <source src="./Dua Lipa - Levitating Featuring DaBaby (Official Music Video).mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Botón de música flotante -->
-    <div class="music-btn muted" id="musicBtn" onclick="toggleMusic()">
-        <svg viewBox="0 0 24 24">
-            <path
-                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-        </svg>
-    </div>
 
     <div class="intro-container">
         <!-- Fondo que actúa como botón -->
@@ -217,34 +166,6 @@
     </div>
 
     <script>
-        // --- MÚSICA DE FONDO ---
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        let isMuted = true;
-
-        // Intentar autoplay cuando se carga la página
-        document.addEventListener('DOMContentLoaded', function () {
-            bgMusic.play().then(() => {
-                musicBtn.classList.remove('muted');
-                isMuted = false;
-            }).catch(() => {
-                // Autoplay bloqueado, esperar interacción del usuario
-                console.log('Autoplay blocked, waiting for user interaction');
-            });
-        });
-
-        function toggleMusic() {
-            if (isMuted) {
-                bgMusic.play().catch(() => { });
-                musicBtn.classList.remove('muted');
-                isMuted = false;
-            } else {
-                bgMusic.pause();
-                musicBtn.classList.add('muted');
-                isMuted = true;
-            }
-        }
-
         const introButton = document.getElementById('introButton');
         const introVideo = document.getElementById('introVideo');
         const loadingOverlay = document.getElementById('loadingOverlay');
