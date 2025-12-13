@@ -521,8 +521,8 @@
 
 <body>
 
-    <!-- Audio de fondo - Nuevo Audio -->
-    <audio id="bgMusic" class="bg-audio" loop>
+    <!-- Audio de fondo - Nuevo Audio (carga diferida para no afectar velocidad) -->
+    <audio id="bgMusic" class="bg-audio" loop preload="none">
         <source src="./nuevo audio.mp3" type="audio/mpeg">
     </audio>
 
