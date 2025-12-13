@@ -169,6 +169,13 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const tapText = document.querySelector('.tap-text');
 
+        // Precargar video cuando la página carga (después de la imagen)
+        window.addEventListener('load', function () {
+            // Forzar precarga del video en segundo plano
+            introVideo.preload = 'auto';
+            introVideo.load();
+        });
+
         // Al tocar el fondo
         introButton.addEventListener('click', function () {
             // Ocultar fondo y texto
