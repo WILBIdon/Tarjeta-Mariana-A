@@ -233,12 +233,46 @@
             margin-bottom: 8px;
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
             transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        /* Animación de pulso para los botones */
+        @keyframes buttonPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+            }
+
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 25px rgba(255, 0, 255, 0.7), 0 0 40px rgba(255, 0, 255, 0.3);
+            }
+        }
+
+        /* Animación con delay para efecto de ola */
+        .action-item:nth-child(1) .icon-circle {
+            animation-delay: 0s;
+        }
+
+        .action-item:nth-child(2) .icon-circle {
+            animation-delay: 0.3s;
+        }
+
+        .action-item:nth-child(3) .icon-circle {
+            animation-delay: 0.6s;
+        }
+
+        .action-item:nth-child(4) .icon-circle {
+            animation-delay: 0.9s;
         }
 
         .action-item:hover .icon-circle {
             transform: scale(1.15);
             box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
             background: rgba(255, 0, 255, 0.15);
+            animation: none;
         }
 
         .icon-circle svg {
@@ -253,6 +287,20 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
             font-family: 'Segoe UI', sans-serif;
             font-weight: 500;
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 1), 0 0 10px rgba(255, 0, 255, 0.5);
+            }
         }
 
         /* --- 8. BOTÓN DE COMPARTIR Y MÚSICA --- */
