@@ -159,8 +159,8 @@
         <div class="tap-text">Toca para abrir tu invitación ✨</div>
     </div>
 
-    <!-- Video optimizado: preload="none" para no bloquear carga inicial -->
-    <video class="intro-video" id="introVideo" playsinline webkit-playsinline preload="none">
+    <!-- Video optimizado: muted para autoplay, metadata para carga rápida -->
+    <video class="intro-video" id="introVideo" playsinline webkit-playsinline muted preload="metadata">
         <source src="./video.mp4" type="video/mp4">
     </video>
 
@@ -175,10 +175,42 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const tapText = document.querySelector('.tap-text');
         let videoReady = false;
+        let videoStarted = false;
 
-        // Marcar video como listo cuando puede reproducirse sin pausas
-        introVideo.addEventListener('canplaythrough', function () {
+        // Marcar video como listo cuando puede empezar a reproducirse
+        introVideo.addEventListener('canplay', function () {
             videoReady = true;
+            console.log('Video listo para reproducir');
+        });
+
+        // Fallback: También detectar loadeddata
+        introVideo.addEventListener('loadeddata', function () {
+            videoReady = true;
+            console.log('Video data cargada');
+        });
+
+        // Manejar errores de video
+        introVideo.addEventListener('error', function (e) {
+            console.log('Error de video:', e);
+            window.location.href = './tarjeta.html';
+        });
+
+        // Manejar stalled (video atascado)
+        introVideo.addEventListener('stalled', function () {
+            console.log('Video stalled, esperando...');
+        });
+
+        // Manejar waiting (buffering)
+        introVideo.addEventListener('waiting', function () {
+            if (videoStarted) {
+                loadingOverlay.classList.add('active');
+            }
+        });
+
+        // Cuando hay datos suficientes para seguir
+        introVideo.addEventListener('playing', function () {
+            loadingOverlay.classList.remove('active');
+            videoStarted = true;
         });
 
         // Al tocar el fondo
@@ -190,24 +222,45 @@
             // Mostrar video
             introVideo.classList.add('active');
 
-            if (videoReady) {
-                // Video ya está listo, reproducir inmediatamente
-                introVideo.play().catch((error) => {
-                    console.log('Error playing video:', error);
-                    window.location.href = './tarjeta.html';
-                });
-            } else {
-                // Mostrar loading y esperar a que el video esté listo
-                loadingOverlay.classList.add('active');
+            // Forzar carga del video
+            introVideo.load();
 
-                introVideo.addEventListener('canplaythrough', function onReady() {
+            // Mostrar loading
+            loadingOverlay.classList.add('active');
+
+            // Función para iniciar reproducción
+            function startPlayback() {
+                introVideo.play().then(() => {
                     loadingOverlay.classList.remove('active');
-                    introVideo.play().catch((error) => {
-                        console.log('Error playing video:', error);
-                        window.location.href = './tarjeta.html';
-                    });
-                    introVideo.removeEventListener('canplaythrough', onReady);
+                    videoStarted = true;
+                }).catch((error) => {
+                    console.log('Error playing video:', error);
+                    // Reintentar una vez más
+                    setTimeout(() => {
+                        introVideo.play().catch(() => {
+                            window.location.href = './tarjeta.html';
+                        });
+                    }, 500);
+                });
+            }
+
+            if (videoReady) {
+                // Video ya está listo
+                startPlayback();
+            } else {
+                // Esperar a que el video esté listo
+                introVideo.addEventListener('canplay', function onReady() {
+                    startPlayback();
+                    introVideo.removeEventListener('canplay', onReady);
                 }, { once: true });
+
+                // Timeout de seguridad: si no carga en 8 segundos, redirigir
+                setTimeout(() => {
+                    if (!videoStarted) {
+                        console.log('Timeout: redirigiendo a tarjeta');
+                        window.location.href = './tarjeta.html';
+                    }
+                }, 8000);
             }
         });
 
